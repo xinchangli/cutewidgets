@@ -1,15 +1,22 @@
+################################################################################
+# Source paths
+################################################################################
+
+CUTEWIDGETS_ROOT            = $$PWD
+CUTEWIDGETS_OUTPUT_LIB      = $$CUTEWIDGETS_ROOT/lib
+CUTEWIDGETS_OUTPUT_PLUGIN   = $$CUTEWIDGETS_ROOT/plugin
 
 ######################################################################
 # Install paths
 ######################################################################
 
-CUTEWIDGETS_INSTALL_PREFIX = $$[QT_INSTALL_PREFIX]
+CUTEWIDGETS_INSTALL_PREFIX      = $$[QT_INSTALL_PREFIX]
 
-CUTEWIDGETS_INSTALL_DIR_NAME = QtCuteWidgets
+CUTEWIDGETS_INSTALL_DIR_NAME    = QtCuteWidgets
 
-#CUTEWIDGETS_INSTALL_DOCS      = $${CUTEWIDGETS_INSTALL_PREFIX}/doc
-CUTEWIDGETS_INSTALL_HEADERS   = $${CUTEWIDGETS_INSTALL_PREFIX}/include/$$CUTEWIDGETS_INSTALL_DIR_NAME
-#CUTEWIDGETS_INSTALL_LIBS      = $${CUTEWIDGETS_INSTALL_PREFIX}/lib
+CUTEWIDGETS_INSTALL_HEADERS     = $${CUTEWIDGETS_INSTALL_PREFIX}/include/$$CUTEWIDGETS_INSTALL_DIR_NAME
+
+CUTEWIDGETS_INSTALL_LIB         = $${CUTEWIDGETS_INSTALL_PREFIX}/lib
 
 ######################################################################
 # Designer plugin
@@ -23,20 +30,6 @@ CUTEWIDGETS_INSTALL_HEADERS   = $${CUTEWIDGETS_INSTALL_PREFIX}/include/$$CUTEWID
 
 CUTEWIDGETS_INSTALL_PLUGINS_FOR_DESIGNER   = $${CUTEWIDGETS_INSTALL_PREFIX}/plugins/designer
 CUTEWIDGETS_INSTALL_PLUGINS_FOR_CREATOR    = $${CUTEWIDGETS_INSTALL_PREFIX}/../../Tools/QtCreator/bin/plugins/designer
-
-######################################################################
-# Features
-# When building a CuteWidgets application with qmake you might want to load
-# the compiler/linker flags, that are required to build a CuteWidgets application
-# from qwt.prf. Therefore all you need to do is to add "CONFIG += qwt"
-# to your project file and take care, that qwt.prf can be found by qmake.
-# ( see http://doc.trolltech.com/4.7/qmake-advanced-usage.html#adding-new-configuration-features )
-# I recommend not to install the CuteWidgets features together with the
-# Qt features, because you will have to reinstall the CuteWidgets features,
-# with every Qt upgrade.
-######################################################################
-
-#CUTEWIDGETS_INSTALL_FEATURES  = $${CUTEWIDGETS_INSTALL_PREFIX}/mkspecs/features
 
 ######################################################################
 # Build the static/shared libraries.

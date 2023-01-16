@@ -1,6 +1,15 @@
 
 include($$PWD/../cutewidgets.pri)
 
+################################################################################
+# 若qtcreator路径下已生成cutewidgets_plugin.dll，编译前需要关闭qtcreator并删除qtcreator
+# 路径下的cutewidgets_plugin.dll，然后再编译，因为qtcreator打开情况下，该dll是被加载状态，
+# 无法覆盖拷贝;也可以将INSTALL_TO_CREATOR置0，编译完后关闭qtcreator，手动拷贝；
+# 运行例程时需要置0，避免因为编译错误，无法运行或调试例程
+################################################################################
+
+INSTALL_TO_CREATOR = 0
+
 CONFIG(debug_and_release) {
 
     # When building debug_and_release the designer plugin is built
@@ -38,40 +47,18 @@ contains(CUTEWIDGETS_CONFIG, CuteWidgetsDesigner) {
 
     INCLUDEPATH     += $$CUTEWIDGETS_ROOT/src
 
-    #########################################################################
-    # INSTALL_INCLUDE_FILES 为头文件安装文件汇总，所有源码的pri文件中需定义要拷贝的头文件
-    # 例如 xxx.pri文件定义如下：
-    #
-    #    !contains(DEFINES, DEFINE_CUTEWIDGETS_TESTEDIT) {
-    #        DEFINES += DEFINE_CUTEWIDGETS_TESTEDIT
-    #    }
-    #
-    #    QT += widgets
-    #
-    #    INCLUDEPATH += $$PWD
-    #
-    #    HEADERS += \
-    #        $$PWD/testedit.h
-    #
-    #    SOURCES += \
-    #        $$PWD/testedit.cpp
-    #
-    #    #######################################################
-    #    添加需要install的头文件，designer插件使用
-    #    #######################################################
-    #
-    #    #INSTALL_INCLUDE_FILES += $$PWD/testedit.h
-    #
-    #########################################################################
-
-    unset(INSTALL_INCLUDE_FILES)
-    INSTALL_INCLUDE_FILES += $$CUTEWIDGETS_ROOT/src/cutewidgets_global.h
 
     #包含指定源码
     contains(CUTEWIDGETS_CONFIG, CuteWidgetsTestEdit) {
 
         include($$CUTEWIDGETS_ROOT/src/testedit/testedit.pri)
     }
+
+    ########################################################################
+    #                           在此新增自定义控件源码                         #
+    ########################################################################
+
+    #new pri here
 
     #designer 插件文件
     HEADERS         += designer_plugin.h
@@ -90,8 +77,13 @@ contains(CUTEWIDGETS_CONFIG, CuteWidgetsDesigner) {
     }
 
     target_headers.path  = $$CUTEWIDGETS_INSTALL_HEADERS
-    target_headers.files = $$INSTALL_INCLUDE_FILES
+    target_headers.files = $$CUTEWIDGETS_ROOT/include/*.h
     INSTALLS        += target_headers
+
+    target_lib.path  = $$CUTEWIDGETS_INSTALL_LIB
+    target_lib.files = $$CUTEWIDGETS_OUTPUT_LIB/cutewidgets.dll $$CUTEWIDGETS_OUTPUT_LIB/cutewidgets.lib
+    INSTALLS        += target_lib
+
 }
 else {
     TEMPLATE        = subdirs # do nothing

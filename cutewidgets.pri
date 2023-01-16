@@ -1,34 +1,17 @@
 ################################################################################
-# 若qtcreator路径下已生成cutewidgets_plugin.dll，编译前需要关闭qtcreator并删除qtcreator
-# 路径下的cutewidgets_plugin.dll，然后再编译，因为qtcreator打开情况下，该dll是被加载状态，
-# 无法覆盖拷贝;也可以将INSTALL_TO_CREATOR置0，编译完后关闭qtcreator，手动拷贝；
-# 运行例程时需要置0，避免因为编译错误，无法运行或调试例程
-################################################################################
-
-INSTALL_TO_CREATOR = 0
-
-################################################################################
-# 相关路径
-################################################################################
-
-CUTEWIDGETS_ROOT            = $$PWD
-CUTEWIDGETS_OUTPUT_LIB      = $$CUTEWIDGETS_ROOT/lib
-CUTEWIDGETS_OUTPUT_PLUGIN   = $$CUTEWIDGETS_ROOT/plugin
-
-################################################################################
 # CONFIG配置文件
 ################################################################################
 
-include($$CUTEWIDGETS_ROOT/cutewidgetsconfig.pri)
+include($$PWD/cutewidgetsconfig.pri)
 
 ################################################################################
 # 函数定义
 ################################################################################
 
-include($$CUTEWIDGETS_ROOT/cutewidgetsfunctions.pri)
+include($$PWD/cutewidgetsfunctions.pri)
 
 ################################################################################
 # 构建配置
 ################################################################################
 
-include($$CUTEWIDGETS_ROOT/cutewidgetsbuild.pri)
+include($$PWD/cutewidgetsbuild.pri)

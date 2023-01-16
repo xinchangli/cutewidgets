@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "testedit/testedit.h"
+#include "testedit.h"
 
 #include <QVBoxLayout>
 

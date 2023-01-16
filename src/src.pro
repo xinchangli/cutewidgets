@@ -17,9 +17,27 @@ else {
 
 INCLUDEPATH     += $$CUTEWIDGETS_ROOT/src
 
-HEADERS += \
-    $$PWD/cutewidgets_global.h
 
+unset(INSTALL_INCLUDE_FILES)
+INSTALL_INCLUDE_FILES += $$CUTEWIDGETS_ROOT/src/cutewidgets_global.h
+
+#包含指定源码
 contains(CUTEWIDGETS_CONFIG, CuteWidgetsTestEdit) {
-    include(testedit/testedit.pri)
+
+    include($$CUTEWIDGETS_ROOT/src/testedit/testedit.pri)
 }
+
+########################################################################
+#                           在此新增自定义控件源码                         #
+########################################################################
+
+#new pri here
+
+
+########################################################################
+#头文件拷贝
+########################################################################
+
+target_headers.path  = $$CUTEWIDGETS_ROOT/include
+target_headers.files = $$INSTALL_INCLUDE_FILES
+INSTALLS        += target_headers

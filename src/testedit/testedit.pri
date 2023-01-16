@@ -14,7 +14,7 @@ SOURCES += \
     $$PWD/testedit.cpp
 
 ########################################################
-#添加需要install的头文件，designer插件使用
+# 添加需要install的头文件
 ########################################################
 
 INSTALL_INCLUDE_FILES += $$PWD/testedit.h

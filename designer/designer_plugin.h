@@ -19,34 +19,41 @@ const QString strQTInclude = QString("%1/").arg(STRVALUE(CUTEWIDGETS_STR));
 const QString strQTInclude = "";
 #endif
 
-class CustomWidgetInterface : public QDesignerCustomWidgetInterface
+class CuteWidgetInterface : public QDesignerCustomWidgetInterface
 {
 public:
-    virtual QString group() const override { return "Cute Widgets"; }
-    virtual bool isContainer() const override { return false; }
-    virtual bool isInitialized() const override { return true; }
+    virtual QString name() const override;
+    virtual QString group() const override;
+    virtual QString toolTip() const override;
+    virtual QString whatsThis() const override;
+    virtual QString includeFile() const override;
+    virtual QIcon icon() const override;
 
-    virtual QIcon icon() const override { return m_icon; }
-    virtual QString codeTemplate() const override { return m_codeTemplate; }
-    virtual QString domXml() const override { return m_domXml; }
-    virtual QString includeFile() const override { return m_include; }
-    virtual QString name() const override { return m_name; }
-    virtual QString toolTip() const override { return m_toolTip; }
-    virtual QString whatsThis() const override { return m_whatsThis; }
+    virtual bool isContainer() const override;
+
+    virtual bool isInitialized() const override;
+    virtual void initialize(QDesignerFormEditorInterface *core) override;
+
+    virtual QString domXml() const override;
+
+    virtual QString codeTemplate() const override;
 
 protected:
     QString m_name;
-    QString m_include;
+    QString m_group;
     QString m_toolTip;
     QString m_whatsThis;
+    QString m_include;
+    QIcon m_icon;
+    bool m_isContainer;
+    bool m_initialized;
     QString m_domXml;
     QString m_codeTemplate;
-    QIcon m_icon;
 };
 
 #ifdef DEFINE_CUTEWIDGETS_TESTEDIT
 
-class TestEditInterface : public CustomWidgetInterface
+class TestEditInterface : public CuteWidgetInterface
 {
 public:
     TestEditInterface();
@@ -77,7 +84,6 @@ public:
 #ifdef DEFINE_CUTEWIDGETS_TESTEDIT
         m_plugins += new TestEditInterface();
 #endif
-
     }
 
     virtual ~CuteWidgetsCollectionInterface() override
